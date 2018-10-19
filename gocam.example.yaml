@@ -1,0 +1,15 @@
+# Find the URL to the JPG output of your IP camera,
+# check http://www.ispyconnect.com/sources.aspx for examples.
+cameraURL: "<< YOUR CAMERA IMAGE URL >>"
+imagePath: "./images"
+verbose: false
+interval: 5s
+maxKeepedImageFiles: 10
+treshold: 4
+
+# Possible handlers are:
+#  - console    Write alerts to stderr
+#  - diff       Create a difference image with imagick's compare tool
+alertHandlers:
+  - console
+  - diff

@@ -1,0 +1,12 @@
+
+[[constraint]]
+  name = "github.com/Sirupsen/logrus"
+  version = "1.1.1"
+
+[[constraint]]
+  name = "github.com/corona10/goimagehash"
+  version = "0.2.0"
+
+[prune]
+  go-tests = true
+  unused-packages = true
