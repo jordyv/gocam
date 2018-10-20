@@ -1,6 +1,6 @@
-# Gocam - IP camera alert tools written in Go #
+# Gocam - IP camera alert tool written in Go #
 
-Simple script to get an image from the IP camera every x seconds, calculate the unique hash with the ... algorithm and compare it with the previous capture. When the configured treshold is reached, it will trigger an action.
+Simple script to get an image from the IP camera every x seconds, calculate the unique hash with the [difference hashing](http://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html) algorithm and compare it with the previous capture. When the configured treshold is reached, it will trigger an action.
 
 Currently supported alerts/actions:
  - Write a line to a log file
@@ -14,7 +14,7 @@ Currently supported alerts/actions:
 
 ## Configuration ##
 
-Create a 'gocam.yaml' file in /etc or at your home folder. Check `gocam.example.yaml` for an example.
+Create a `gocam.yaml` file in `/etc` or at your home folder. Check `gocam.example.yaml` for an example.
 
 ```yaml
 cameraURL: "<< YOUR CAMERA IMAGE URL >>"
