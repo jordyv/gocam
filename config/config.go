@@ -30,6 +30,8 @@ const (
 	configTreshold            = "treshold"
 	configAlertHandlers       = "alertHandlers"
 	configAlertHandlerOptions = "alertHandlerOptions"
+
+	configTelegramOptions = "telegram"
 )
 
 func init() {
@@ -94,4 +96,13 @@ func (c *Config) GetLogAlertHandlerOptions() *alerting.LogAlertHandlerOptions {
 
 func (c *Config) GetDiffImageAlertHandlerOptions() *alerting.DiffImageAlertHandlerOptions {
 	return &alerting.DiffImageAlertHandlerOptions{ImagePath: fmt.Sprintf("%s/%s", c.ImagePath, "diff")}
+}
+
+func (c *Config) GetTelegramAlertHandlerOptions() *alerting.TelegramAlertHandlerOptions {
+	viper.SetDefault(configTelegramOptions, map[string]string{"chatID": "", "token": ""})
+	telegramConfig := viper.GetStringMapString(configTelegramOptions)
+	return &alerting.TelegramAlertHandlerOptions{
+		ChatID:   telegramConfig["chatid"],
+		BotToken: telegramConfig["token"],
+	}
 }

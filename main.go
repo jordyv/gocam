@@ -55,6 +55,9 @@ func buildAlertHandlers() []alerting.AlertHandler {
 	if config.HasAlertHandler("diff") {
 		handlers = append(handlers, &alerting.DiffImageAlertHandler{Options: config.GetDiffImageAlertHandlerOptions()})
 	}
+	if config.HasAlertHandler("telegram") {
+		handlers = append(handlers, &alerting.TelegramAlertHandler{Options: config.GetTelegramAlertHandlerOptions()})
+	}
 	return handlers
 }
 

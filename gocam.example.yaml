@@ -10,6 +10,14 @@ treshold: 4
 # Possible handlers are:
 #  - console    Write alerts to stderr
 #  - diff       Create a difference image with imagick's compare tool
+#  - telegram   Send a message to a Telegram Bot
 alertHandlers:
   - console
   - diff
+  - telegram
+
+# Options for Telegram alerting
+# See https://core.telegram.org/bots for info about Telegram Bots and how to setup a bot
+telegram:
+  chatID: "<< Telegram Chat ID >>"
+  token: "<< Telegram Bot API token >>"

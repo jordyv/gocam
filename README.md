@@ -27,5 +27,6 @@ treshold: 4
 alertHandlers:
   - console
   - diff
+  - telegram
 
 ```
