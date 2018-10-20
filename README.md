@@ -1,6 +1,6 @@
 # Gocam - IP camera alert tool written in Go #
 
-Simple script to get an image from the IP camera every x seconds, calculate the unique hash with the [difference hashing](http://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html) algorithm and compare it with the previous capture. When the configured treshold is reached, it will trigger an action.
+Simple script to get an image from the IP camera every x seconds, calculate the unique hash with the [perception hashing](https://en.wikipedia.org/wiki/Perceptual_hashing) algorithm and compare it with the previous capture. When the configured treshold is reached, it will trigger an action.
 
 Currently supported alerts/actions:
  - Write a line to a log file
