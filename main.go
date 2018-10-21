@@ -11,6 +11,7 @@ import (
 	"github.com/jordyv/gocam/camera"
 	cfg "github.com/jordyv/gocam/config"
 	"github.com/jordyv/gocam/hasher"
+	"github.com/jordyv/gocam/http"
 	sys "golang.org/x/sys/unix"
 )
 
@@ -104,8 +105,17 @@ func main() {
 	hashCalculator = hasher.New()
 	alertManager = alerting.New(buildAlertHandlers())
 
-	for {
-		runCycle()
-		time.Sleep(config.Interval)
+	if config.HTTPEnabled {
+		httpClient := gocamhttp.NewGocamHttp(config)
+		log.Infoln("Start HTTP server at", config.HTTPAddr)
+		go httpClient.Listen()
 	}
+
+	go func() {
+		for {
+			runCycle()
+			time.Sleep(config.Interval)
+		}
+	}()
+	select {}
 }

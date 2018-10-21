@@ -19,6 +19,8 @@ type Config struct {
 	Treshold            int
 	AlertHandlers       []string
 	LogLevel            log.Level
+	HTTPEnabled         bool
+	HTTPAddr            string
 }
 
 const (
@@ -30,6 +32,8 @@ const (
 	configTreshold            = "treshold"
 	configAlertHandlers       = "alertHandlers"
 	configAlertHandlerOptions = "alertHandlerOptions"
+	configHTTPEnabled         = "http"
+	configHTTPAddr            = "httpAddr"
 
 	configTelegramOptions = "telegram"
 )
@@ -48,6 +52,8 @@ func init() {
 	viper.SetDefault(configVerbose, false)
 	viper.SetDefault(configTreshold, 8)
 	viper.SetDefault(configAlertHandlers, []string{})
+	viper.SetDefault(configHTTPEnabled, false)
+	viper.SetDefault(configHTTPAddr, ":6090")
 
 	err := viper.ReadInConfig()
 	if err != nil {
@@ -63,6 +69,8 @@ func (c *Config) Build() {
 	c.ImagePath = viper.GetString(configImagePath)
 	c.Treshold = viper.GetInt(configTreshold)
 	c.AlertHandlers = viper.GetStringSlice(configAlertHandlers)
+	c.HTTPEnabled = viper.GetBool(configHTTPEnabled)
+	c.HTTPAddr = viper.GetString(configHTTPAddr)
 
 	if viper.GetBool(configVerbose) {
 		c.LogLevel = log.DebugLevel
