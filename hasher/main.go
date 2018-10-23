@@ -31,6 +31,7 @@ func (h *Hasher) CalculateHash(filePath string) (hash *ImageHash, err error) {
 	if err != nil {
 		return
 	}
+	defer file.Close()
 	img, err := jpeg.Decode(file)
 	if err != nil {
 		return

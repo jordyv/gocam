@@ -3,7 +3,6 @@ package alerting
 import (
 	"fmt"
 	"io/ioutil"
-	"os"
 )
 
 type LogAlertHandlerOptions struct {
@@ -17,5 +16,5 @@ type LogAlertHandler struct {
 
 func (h *LogAlertHandler) Notify(alert *Alert) {
 	logLine := fmt.Sprintf("Alerting for image %s with level %d\n", alert.currentImagePath, alert.level)
-	ioutil.WriteFile(h.Options.FilePath, []byte(logLine), os.ModePerm)
+	ioutil.WriteFile(h.Options.FilePath, []byte(logLine), 0644)
 }
