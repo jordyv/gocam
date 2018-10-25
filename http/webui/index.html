@@ -34,23 +34,30 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h3 class="mb-1">{{ alerts.length }}</h3>
+                  <h3 class="mb-1">{{ totalAlerts }}</h3>
                   <div class="text-muted">alerts</div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-4 col-sm-12" v-for="alert in alerts">
-              <div class="card p-3">
-                <a :href="`/images/alert/` + alert.image_name" target="_blank">
-                  <img :src="`/images/alert/` + alert.image_name" />
-                </a>
-                <div class="ml-auto text-muted">
-                  {{ formatDate(alert.timestamp) }}
+          <div v-for="(alerts, date) in alertGroups">
+            <div class="row">
+                <div class="col-12">
+                  <h4><a :href="`#collapse-`+getTimestamp(date)" data-toggle="collapse">{{ formatDate(date) }}</a></h4>
                 </div>
               </div>
-            </div>
+              <div :id="`collapse-`+getTimestamp(date)" :class="{ row: true, collapse: true, 'multi-collapse': true, show: isFirstGroup(date) }">
+                <div class="col-md-4 col-sm-12" v-for="alert in alerts">
+                  <div class="card p-3">
+                    <a :href="`/images/alert/` + alert.image_name" target="_blank">
+                      <img :src="`/images/alert/` + alert.image_name" />
+                    </a>
+                    <div class="ml-auto text-muted">
+                      {{ formatDateTime(alert.timestamp) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
@@ -72,6 +79,8 @@
       </div>
     </footer>
   </div>
+  <script src="./assets/js/vendor/jquery-3.2.1.min.js"></script>
+  <script src="./assets/js/vendor/bootstrap.bundle.min.js"></script>
   <script src="./app/main.js"></script>
 </body>
 
