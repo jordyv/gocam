@@ -8,6 +8,8 @@ maxKeepedImageFiles: 10
 treshold: 4
 http: true
 httpAddr: :6090
+metrics: true
+metricsAddr: :6091
 
 # Possible handlers are:
 #  - console    Write alerts to stderr

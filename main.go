@@ -12,13 +12,12 @@ import (
 	cfg "github.com/jordyv/gocam/config"
 	"github.com/jordyv/gocam/hasher"
 	"github.com/jordyv/gocam/http"
+	"github.com/jordyv/gocam/metrics"
 	sys "golang.org/x/sys/unix"
 )
 
 var (
 	config *cfg.Config
-
-	alertImageFolderName = "alert"
 
 	client         *camera.Client
 	hashCalculator *hasher.Hasher
@@ -39,7 +38,7 @@ func cleanUp() {
 
 func alertNotify(imagePath string, previousImagePath string, distance int) {
 	newFileName := fmt.Sprintf("%s.jpg", time.Now().Format(time.RFC3339))
-	newImagePath := fmt.Sprintf("%s/%s/%s", config.ImagePath, alertImageFolderName, newFileName)
+	newImagePath := fmt.Sprintf("%s/%s", config.AlertImagePath, newFileName)
 	err := sys.Link(imagePath, newImagePath)
 	if err != nil {
 		log.Panicf("cannot copy %s to %s: %s", imagePath, newImagePath, err)
@@ -106,9 +105,14 @@ func main() {
 	alertManager = alerting.New(buildAlertHandlers())
 
 	if config.HTTPEnabled {
-		httpClient := gocamhttp.NewGocamHttp(config)
+		httpListener := gocamhttp.NewGocamHttp(config)
 		log.Infoln("Start HTTP server at", config.HTTPAddr)
-		go httpClient.Listen()
+		go httpListener.Listen()
+	}
+	if config.MetricsEnabled {
+		metrics := metrics.New(config)
+		log.Infoln("Start metrics endpoint", config.MetricsAddr)
+		go metrics.Listen()
 	}
 
 	go func() {
