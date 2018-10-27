@@ -15,5 +15,5 @@ func NewFakeCommunicator() FakeCommunicator {
 // SaveImage  Get image from IP camera and save it on disk
 func (c FakeCommunicator) SaveImage() (string, error) {
 	dir, _ := os.Getwd()
-	return fmt.Sprintf("%s/test/dummy.jpg", dir), nil
+	return fmt.Sprintf("%s/test/images/same/1.jpg", dir), nil
 }
