@@ -101,7 +101,7 @@ func main() {
 	log.SetFormatter(&log.TextFormatter{FullTimestamp: true})
 	log.SetLevel(config.LogLevel)
 
-	client = camera.NewClient(config.CameraURL, config.ImagePath)
+	client = camera.NewClient(camera.NewIPCameraCommunicator(config.CameraURL, config.ImagePath))
 	hashCalculator = hasher.New()
 	alertManager = alerting.New(buildAlertHandlers())
 
