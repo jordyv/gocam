@@ -1,6 +1,7 @@
 language: go
 go:
-  - "latest"
+  - "1.11"
+  - "master"
 
 install: make install-deps
 script: 
