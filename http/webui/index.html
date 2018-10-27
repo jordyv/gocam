@@ -43,7 +43,7 @@
           <div v-for="(alerts, date) in alertGroups">
             <div class="row">
                 <div class="col-12">
-                  <h4><a :href="`#collapse-`+getTimestamp(date)" data-toggle="collapse">{{ formatDate(date) }}</a></h4>
+                  <h4><a :href="`#collapse-`+getTimestamp(date)" data-toggle="collapse">{{ formatDate(date) }} ({{ alerts.length }})</a></h4>
                 </div>
               </div>
               <div :id="`collapse-`+getTimestamp(date)" :class="{ row: true, collapse: true, 'multi-collapse': true, show: isFirstGroup(date) }">
