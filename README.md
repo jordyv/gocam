@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/jordyv/gocam.svg?branch=master)](https://travis-ci.com/jordyv/gocam)
+[![codecov](https://codecov.io/gh/jordyv/gocam/branch/master/graph/badge.svg)](https://codecov.io/gh/jordyv/gocam)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jordyv/gocam)](https://goreportcard.com/report/github.com/jordyv/gocam)
 
 # Gocam - IP camera alert tool written in Go #
