@@ -111,6 +111,7 @@ func main() {
 	}
 	if config.MetricsEnabled {
 		metrics := metrics.New(config)
+		alertManager.AddAlertHandler(metrics)
 		log.Infoln("Start metrics endpoint", config.MetricsAddr)
 		go metrics.Listen()
 	}

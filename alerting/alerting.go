@@ -41,3 +41,8 @@ func (m *AlertManager) Notify(alert *Alert) {
 		go h.Notify(alert)
 	}
 }
+
+// AddAlertHandler adds a new alert handler to the manager
+func (m *AlertManager) AddAlertHandler(handler AlertHandler) {
+	m.handlers = append(m.handlers, handler)
+}

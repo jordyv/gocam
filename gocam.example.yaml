@@ -2,6 +2,7 @@
 # check http://www.ispyconnect.com/sources.aspx for examples.
 cameraURL: "<< YOUR CAMERA IMAGE URL >>"
 imagePath: "./images"
+alertImagePath: "./images/alert"
 verbose: false
 interval: 5s
 maxKeepedImageFiles: 10

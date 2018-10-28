@@ -6,6 +6,7 @@ import (
 	"time"
 
 	log "github.com/Sirupsen/logrus"
+	"github.com/jordyv/gocam/alerting"
 	"github.com/jordyv/gocam/config"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -43,7 +44,11 @@ func (s *Server) refreshMetrics() {
 	files, _ := ioutil.ReadDir(s.config.AlertImagePath)
 	currentAlertImagesGauge.Set(float64(len(files)))
 
-	alertHistogram.Observe(float64(len(files)))
+}
+
+// Notify gets called by the alert manager and will update the metrics
+func (s Server) Notify(alert *alerting.Alert) {
+	alertHistogram.Observe(1.00)
 }
 
 // Listen starts listening at the metrics endpoint
