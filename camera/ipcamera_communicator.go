@@ -29,6 +29,7 @@ func (c *IPCameraCommunicator) getImage() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer response.Body.Close()
 	if response.StatusCode != 200 {
 		return nil, errors.New("couldn't get the image from the camera, please check your URL and credentials")
 	}
