@@ -19,7 +19,7 @@ var (
 		Name: "gocam_current_alert_images",
 		Help: "Number of alert images currently in storage",
 	})
-	alertHistogram = prometheus.NewHistogram(prometheus.HistogramOpts{
+	alertGauge = prometheus.NewGauge(prometheus.GaugeOpts{
 		Name: "gocam_alerts",
 		Help: "Number of alerts",
 	})
@@ -27,7 +27,7 @@ var (
 
 func init() {
 	prometheus.MustRegister(currentAlertImagesGauge)
-	prometheus.MustRegister(alertHistogram)
+	prometheus.MustRegister(alertGauge)
 }
 
 // Server is the metrics server struct
@@ -48,7 +48,7 @@ func (s *Server) refreshMetrics() {
 
 // Notify gets called by the alert manager and will update the metrics
 func (s Server) Notify(alert *alerting.Alert) {
-	alertHistogram.Observe(1.00)
+	alertGauge.Add(1.00)
 }
 
 // Listen starts listening at the metrics endpoint

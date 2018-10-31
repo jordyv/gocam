@@ -69,7 +69,7 @@ func initConfig() {
 func runCycle() {
 	filePath, err := client.SaveImage()
 	if err != nil {
-		log.Panicln(err)
+		log.Panicln("could not save image from camera;", err)
 		os.Exit(1)
 	}
 	log.Debugln("Saved image from camera at:", filePath)
@@ -110,10 +110,10 @@ func main() {
 		go httpListener.Listen()
 	}
 	if config.MetricsEnabled {
-		metrics := metrics.New(config)
-		alertManager.AddAlertHandler(metrics)
+		m := metrics.New(config)
+		alertManager.AddAlertHandler(m)
 		log.Infoln("Start metrics endpoint", config.MetricsAddr)
-		go metrics.Listen()
+		go m.Listen()
 	}
 
 	go func() {

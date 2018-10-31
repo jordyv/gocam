@@ -61,7 +61,7 @@ func (h *Hasher) CalculateHash(filePath string) (hash *ImageHash, err error) {
 	if err != nil {
 		return
 	}
-	img = h.prepareImage(img)
+	//img = h.prepareImage(img)
 
 	internalHash, err := goimagehash.PerceptionHash(img)
 	hash = &ImageHash{internalHash: internalHash, filePath: filePath}
